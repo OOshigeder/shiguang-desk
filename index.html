@@ -6,197 +6,230 @@
 <title>拾光工作台</title>
 <style>
 :root{
-  --bg:#F4F3EE; --card:#FFFFFF; --line:#E4E3DD;
-  --text:#1A1B1C; --sub:#6B7280;
-  --primary:#9BBBF4; --primary-deep:#6d8fe0; --primary-bg:rgba(155,187,244,0.14);
-  --warn:#F4B393; --warn-bg:rgba(244,179,147,0.16);
-  --green:#52C41A; --red:#EA6668;
+  --bg:#F4F5F7;
+  --card:#FFFFFF;
+  --line:rgba(24,34,62,.08);
+  --text:#171C26;
+  --sub:#6C7484;
+  --sub2:#A3A9B5;
+  --primary:#4C7DF0;
+  --primary-deep:#3A63D4;
+  --primary-bg:#EBF1FE;
+  --accent:#2FB5A3;
+  --accent-bg:#E6F8F5;
+  --warn:#F5A85B;
+  --warn-bg:#FEF4E8;
+  --warn-deep:#C97F2F;
+  --green:#2FBF71;
+  --green-bg:#E9F9F0;
+  --red:#F06060;
+  --red-bg:#FDEEEE;
+  --purple:#8B7CF6;
+  --purple-bg:#F0EDFE;
   --radius:14px;
+  --shadow:0 1px 2px rgba(24,34,62,.05),0 10px 28px rgba(24,34,62,.07);
+  --shadow-sm:0 1px 2px rgba(24,34,62,.06);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
-body{background:var(--bg);color:var(--text);font-family:'Roboto','PingFang SC','Segoe UI','Microsoft YaHei',Arial,sans-serif;font-size:14px;line-height:1.6;}
+body{background:var(--bg);color:var(--text);font-family:'PingFang SC','Microsoft YaHei','Segoe UI',Roboto,Arial,sans-serif;font-size:14px;line-height:1.6;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
-input,select,textarea{font-family:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;color:var(--text);width:100%;outline:none;}
-input:focus,select:focus,textarea:focus{border-color:var(--primary-deep);}
+input,select,textarea{font-family:inherit;font-size:14px;border:1px solid transparent;background:#F1F3F6;border-radius:10px;padding:9px 12px;color:var(--text);width:100%;outline:none;transition:border .15s,background .15s,box-shadow .15s;}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(76,125,240,.12);}
 a{color:var(--primary-deep);text-decoration:none;}
 
 /* ===== 布局 ===== */
 .layout{display:flex;min-height:100vh;}
 .sidebar{
-  width:212px;flex-shrink:0;background:var(--card);border-right:1px solid var(--line);
-  padding:20px 12px;position:sticky;top:0;height:100vh;overflow-y:auto;
+  width:218px;flex-shrink:0;background:var(--card);border-right:1px solid var(--line);
+  padding:22px 14px 16px;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;
 }
-.logo{display:flex;align-items:center;gap:10px;padding:4px 8px 18px;}
-.logo-ic{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#9BBBF4,#6d8fe0);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.logo-tx{font-size:17px;font-weight:700;color:var(--text);line-height:1.2;}
-.logo-sb{font-size:11px;color:var(--sub);}
-.nav{display:flex;flex-direction:column;gap:2px;}
+.logo{display:flex;align-items:center;gap:11px;padding:2px 8px 20px;}
+.logo-ic{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,#5B8DF7,#3A63D4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(76,125,240,.35);}
+.logo-tx{font-size:17px;font-weight:700;color:var(--text);line-height:1.25;letter-spacing:.5px;}
+.logo-sb{font-size:11px;color:var(--sub2);}
+.nav{display:flex;flex-direction:column;gap:2px;flex:1;}
 .nav-item{
-  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;
-  font-size:14px;color:#3a3d42;cursor:pointer;user-select:none;
+  display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:11px;
+  font-size:14px;color:#3D4350;cursor:pointer;user-select:none;position:relative;transition:background .15s,color .15s;
 }
-.nav-item:hover{background:#f0f2f7;}
+.nav-item:hover{background:#F2F4F8;color:#242A36;}
 .nav-item.on{background:var(--primary-bg);color:var(--primary-deep);font-weight:600;}
+.nav-item.on::before{content:'';position:absolute;left:0;top:22%;bottom:22%;width:3px;border-radius:3px;background:var(--primary);}
 .nav-item .ic{font-size:16px;width:22px;text-align:center;flex-shrink:0;}
-.nav-item .pt{color:var(--warn);font-size:12px;font-weight:700;}
-.main{flex:1;min-width:0;padding:24px 28px 48px;max-width:1100px;}
-.page-title{font-size:22px;font-weight:700;margin-bottom:4px;}
-.page-sub{color:var(--sub);font-size:13px;margin-bottom:20px;}
+.nav-badge{margin-left:auto;min-width:19px;height:19px;padding:0 6px;border-radius:10px;background:var(--warn);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(245,168,91,.4);}
+.main{flex:1;min-width:0;padding:28px 32px 56px;max-width:1080px;}
+.page-title{font-size:24px;font-weight:700;letter-spacing:.3px;margin-bottom:4px;}
+.page-sub{color:var(--sub);font-size:13px;margin-bottom:22px;}
 
 /* ===== 卡片 ===== */
-.card{background:var(--card);border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius);padding:16px 18px;margin-bottom:16px;}
-.card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.card-h .t{font-size:15px;font-weight:600;}
-.card-h .more{font-size:12px;color:var(--sub);cursor:pointer;}
-.grid{display:flex;flex-wrap:wrap;gap:14px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm);}
+.card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.card-h .t{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;}
+.card-h .more{font-size:12px;color:var(--sub);cursor:pointer;transition:color .15s;}
+.card-h .more:hover{color:var(--primary-deep);}
+.grid{display:flex;flex-wrap:wrap;gap:16px;}
 .grid > .card{flex:1 1 300px;margin-bottom:0;}
-.kpi-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
-.kpi{flex:1 1 150px;min-width:130px;background:var(--card);border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius);padding:14px 16px;}
+
+/* ===== 首页双列 ===== */
+.home-grid{display:flex;flex-wrap:wrap;gap:16px;}
+.home-col{flex:1 1 330px;min-width:280px;display:flex;flex-direction:column;gap:16px;}
+
+/* ===== KPI ===== */
+.kpi-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px;}
+.kpi{flex:1 1 170px;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:2px;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s;}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.kpi:has(.k-ic){flex-direction:row;align-items:center;gap:14px;}
+.kpi .k-ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.kpi .k-body{min-width:0;}
 .kpi .k-l{font-size:12px;color:var(--sub);}
-.kpi .k-v{font-size:24px;font-weight:700;margin-top:2px;}
+.kpi .k-v{font-size:24px;font-weight:700;line-height:1.25;}
 .kpi .k-v small{font-size:12px;color:var(--sub);font-weight:400;}
 
 /* ===== 按钮 ===== */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-size:14px;font-weight:500;background:#f0f2f7;color:#3a3d42;transition:opacity .15s;}
-.btn:hover{opacity:.85;}
-.btn.primary{background:var(--primary-deep);color:#fff;}
-.btn.warn{background:var(--warn);color:#5c3a1e;}
-.btn.danger{background:#fde8e8;color:var(--red);}
-.btn.sm{padding:5px 12px;font-size:12px;border-radius:8px;}
-.btn:disabled{opacity:.45;cursor:not-allowed;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:10px;font-size:14px;font-weight:500;background:#EEF0F4;color:#3D4350;transition:background .15s,box-shadow .15s,opacity .15s;}
+.btn:hover{background:#E3E6EC;}
+.btn.primary{background:linear-gradient(135deg,#5B8DF7,#3A63D4);color:#fff;box-shadow:0 4px 12px rgba(76,125,240,.28);}
+.btn.primary:hover{box-shadow:0 6px 18px rgba(76,125,240,.4);opacity:.97;background:linear-gradient(135deg,#5B8DF7,#3A63D4);}
+.btn.warn{background:linear-gradient(135deg,#F7B26B,#F59B4A);color:#fff;box-shadow:0 4px 12px rgba(245,168,91,.32);}
+.btn.danger{background:var(--red-bg);color:var(--red);}
+.btn.danger:hover{background:#FBE3E3;}
+.btn.sm{padding:5px 12px;font-size:12px;border-radius:9px;}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;}
 
-/* ===== 徽章/标签 ===== */
-.chip{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;background:#f0f2f7;color:#4a4d52;}
+/* ===== 标签 ===== */
+.chip{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;background:#F1F3F6;color:#4A5262;}
 .chip.blue{background:var(--primary-bg);color:var(--primary-deep);}
-.chip.orange{background:var(--warn-bg);color:#b06a2e;}
-.chip.red{background:#fde8e8;color:var(--red);}
-.chip.green{background:#eaf7e2;color:#3d8f1d;}
-.chip.purple{background:#f1e9fb;color:#7a4fc0;}
-.chip.cyan{background:#e2f5f6;color:#1e8f94;}
+.chip.orange{background:var(--warn-bg);color:var(--warn-deep);}
+.chip.red{background:var(--red-bg);color:var(--red);}
+.chip.green{background:var(--green-bg);color:#1F9D57;}
+.chip.purple{background:var(--purple-bg);color:#6D5CE8;}
+.chip.cyan{background:#E4F6F8;color:#189A9F;}
 .badge-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;}
 
 /* ===== 列表 ===== */
-.list-item{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid #f2f1ec;}
+.list-item{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid #F0F1F4;}
 .list-item:last-child{border-bottom:none;}
 .list-item .grow{flex:1;min-width:0;}
 .list-item .tt{font-size:14px;font-weight:500;}
-.list-item .ds{font-size:12px;color:var(--sub);margin-top:1px;}
+.list-item .ds{font-size:12px;color:var(--sub);margin-top:2px;}
 .check{
-  width:20px;height:20px;border-radius:50%;border:2px solid #c9cbc2;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;cursor:pointer;background:#fff;
+  width:22px;height:22px;border-radius:50%;border:2px solid #D4D8E0;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;cursor:pointer;background:#fff;transition:border .15s,background .15s,box-shadow .15s;
 }
-.check.done{background:var(--green);border-color:var(--green);}
-.task-done .tt{text-decoration:line-through;color:#a8aaa3;}
+.check:hover{border-color:var(--primary);}
+.check.done{background:linear-gradient(135deg,#38D27F,#23A862);border-color:transparent;box-shadow:0 2px 8px rgba(47,191,113,.32);}
+.task-done .tt{text-decoration:line-through;color:#A6ACB6;}
 
 /* ===== 模态框 ===== */
-.mask{position:fixed;inset:0;background:rgba(20,22,26,.42);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:440px;max-height:86vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,.16);}
-.modal h3{font-size:16px;margin-bottom:14px;}
-.fld{margin-bottom:12px;}
-.fld label{display:block;font-size:12px;color:var(--sub);margin-bottom:4px;}
+.mask{position:fixed;inset:0;background:rgba(23,29,45,.45);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
+.modal{background:#fff;border-radius:18px;padding:24px;width:100%;max-width:460px;max-height:86vh;overflow-y:auto;box-shadow:0 24px 70px rgba(23,29,45,.22);}
+.modal h3{font-size:17px;margin-bottom:18px;font-weight:700;}
+.fld{margin-bottom:14px;}
+.fld label{display:block;font-size:12px;color:var(--sub);margin-bottom:6px;}
 .fld .opt-row{display:flex;gap:8px;flex-wrap:wrap;}
-.opt{flex:1 1 74px;text-align:center;padding:7px 6px;border-radius:10px;border:1px solid var(--line);font-size:13px;cursor:pointer;background:#fff;color:#3a3d42;}
-.opt.on{border-color:var(--primary-deep);background:var(--primary-bg);color:var(--primary-deep);font-weight:600;}
-.m-btn{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;}
+.opt{flex:1 1 74px;text-align:center;padding:8px 6px;border-radius:10px;border:1px solid var(--line);font-size:13px;cursor:pointer;background:#fff;color:#3D4350;transition:all .15s;}
+.opt:hover{border-color:var(--primary);}
+.opt.on{border-color:var(--primary);background:var(--primary-bg);color:var(--primary-deep);font-weight:600;}
+.m-btn{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
 
 /* ===== 课表 ===== */
-.week-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-.week-bar .wk{font-size:14px;font-weight:600;}
+.week-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.week-bar .wk{font-size:15px;font-weight:700;}
 .tb-wrap{overflow-x:auto;}
-table.cal{width:100%;border-collapse:separate;border-spacing:4px;table-layout:fixed;}
+table.cal{border-collapse:separate;border-spacing:5px;width:100%;table-layout:fixed;min-width:660px;}
 table.cal th{font-size:12px;color:var(--sub);padding:6px 2px;font-weight:500;}
 table.cal th.today{color:var(--primary-deep);font-weight:700;}
-table.cal td{
-  background:#fbfaf7;border:1px dashed #e6e4dc;border-radius:10px;height:64px;vertical-align:top;
-  padding:6px;cursor:pointer;position:relative;transition:background .15s;
-}
-table.cal td:hover{background:#f2f5fb;}
+table.cal td{background:#FBFBFC;border:1px solid #ECEEF2;border-radius:12px;height:66px;vertical-align:top;padding:5px;cursor:pointer;position:relative;transition:border .15s,background .15s;}
+table.cal td:hover{border-color:var(--primary);background:#F6F8FD;}
 table.cal td.today{border:1.5px solid var(--primary);background:var(--primary-bg);}
-table.cal td .c-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;}
-table.cal td .c-loc{font-size:10px;color:var(--sub);}
-table.cal td .c-weeks{font-size:10px;color:var(--sub);}
-.cell-empty{color:#c9cbc2;font-size:11px;}
+.course-block{background:var(--primary-bg);border-left:3px solid var(--primary);border-radius:9px;padding:5px 7px;margin-bottom:4px;cursor:pointer;overflow:hidden;}
+.course-block .c-name{font-size:12px;font-weight:600;color:#24304A;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.course-block .c-loc{font-size:10px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.course-block .c-weeks{font-size:10px;color:var(--sub2);}
+.cell-empty{color:#CFD3DA;font-size:12px;}
+.week-hint{margin-top:12px;}
 
 /* ===== 打卡 ===== */
 .habit-grid{overflow-x:auto;}
-table.hab{border-collapse:separate;border-spacing:4px;width:100%;min-width:520px;}
+table.hab{border-collapse:separate;border-spacing:5px;width:100%;min-width:560px;}
 table.hab th{font-size:11px;color:var(--sub);padding:4px;text-align:center;font-weight:500;}
 table.hab td{text-align:center;padding:2px;}
-.hcell{
-  width:34px;height:34px;border-radius:10px;background:#f0f2f7;margin:0 auto;
-  display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;border:1px solid transparent;
-}
-.hcell.on{background:var(--green);color:#fff;}
+.hcell{width:36px;height:36px;border-radius:11px;background:#F1F3F6;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;border:1px solid transparent;transition:all .15s;}
+.hcell:hover{border-color:var(--primary);}
+.hcell.on{background:linear-gradient(135deg,#38D27F,#23A862);color:#fff;box-shadow:0 2px 8px rgba(47,191,113,.32);}
 .hcell.locked{opacity:.35;cursor:not-allowed;}
-.hcell.today{border:2px solid var(--primary-deep);}
-.hab-name{font-size:13px;text-align:left;padding-left:6px !important;}
+.hcell.today{border:2px solid var(--primary);}
+.hab-name{font-size:13px;text-align:left;padding-left:8px !important;}
 
 /* ===== 看板 ===== */
-.kanban{display:flex;flex-wrap:wrap;gap:14px;}
-.kan-col{flex:1 1 240px;min-width:220px;background:#f7f6f2;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px;}
+.kanban{display:flex;flex-wrap:wrap;gap:16px;}
+.kan-col{flex:1 1 240px;min-width:220px;background:#F7F8FA;border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;}
 .kan-col .k-head{font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
-.kan-card{background:#fff;border-radius:10px;padding:10px 12px;border:1px solid rgba(0,0,0,0.06);}
+.kan-card{background:#fff;border-radius:12px;padding:12px 14px;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:box-shadow .15s;}
+.kan-card:hover{box-shadow:var(--shadow);}
 .kan-card .kc-t{font-size:13px;font-weight:600;}
-.kan-card .kc-d{font-size:11px;color:var(--sub);margin-top:2px;}
-.kan-card .kc-b{display:flex;gap:6px;margin-top:8px;}
+.kan-card .kc-d{font-size:11px;color:var(--sub);margin-top:3px;}
+.kan-card .kc-b{display:flex;gap:6px;margin-top:9px;}
 
 /* ===== 黄金 ===== */
-.gold-hero{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:16px;}
-.gold-main{flex:2 1 320px;background:linear-gradient(135deg,rgba(244,179,147,0.20),rgba(244,179,147,0.34));border-radius:16px;padding:22px;}
-.gold-main .g-l{font-size:13px;color:#7a6a58;}
-.gold-main .g-p{font-size:40px;font-weight:800;color:#1A1B1C;margin:4px 0 2px;}
-.gold-main .g-p small{font-size:14px;font-weight:400;color:#7a6a58;}
-.gold-main .g-c{font-size:15px;font-weight:600;}
+.gold-hero{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:18px;}
+.gold-main{flex:2 1 320px;background:linear-gradient(135deg,#2B2F45,#3D445F);border-radius:20px;padding:26px;color:#fff;box-shadow:0 12px 32px rgba(43,47,69,.22);}
+.gold-main .g-l{font-size:13px;color:rgba(255,255,255,.72);}
+.gold-main .g-p{font-size:46px;font-weight:800;letter-spacing:.5px;margin:6px 0 4px;}
+.gold-main .g-p small{font-size:14px;font-weight:400;color:rgba(255,255,255,.7);}
+.gold-main .g-c{font-size:16px;font-weight:600;}
+.gold-main .ds{color:rgba(255,255,255,.65);}
 .gold-side{flex:1 1 220px;display:flex;flex-direction:column;gap:12px;}
-.gold-side .gs{background:#fff;border-radius:14px;padding:14px 16px;flex:1;}
+.gold-side .gs{background:#fff;border-radius:14px;padding:16px 18px;flex:1;border:1px solid var(--line);box-shadow:var(--shadow-sm);}
 .gold-side .gs .g-l{font-size:12px;color:var(--sub);}
-.gold-side .gs .g-v{font-size:20px;font-weight:700;margin-top:2px;}
-.up{color:var(--red);} .down{color:var(--green);}
+.gold-side .gs .g-v{font-size:21px;font-weight:700;margin-top:3px;}
+.up{color:#FF7A7A;} .down{color:#53D68A;}
 
 /* ===== 空态 ===== */
-.empty{text-align:center;color:#b0b2ac;padding:30px 10px;font-size:13px;}
-.empty .e-ic{font-size:34px;margin-bottom:8px;}
+.empty{text-align:center;color:#A6ACB6;padding:32px 10px;font-size:13px;}
+.empty .e-ic{font-size:36px;margin-bottom:10px;}
 
 /* ===== 应用 ===== */
 .app-card{flex:1 1 260px;min-width:220px;}
-.app-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--primary-bg);}
+.app-ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--primary-bg);}
 
 /* ===== 奖励 ===== */
-.reward-item{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid #f2f1ec;}
+.reward-item{display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid #F0F1F4;}
 .reward-item:last-child{border-bottom:none;}
-.reward-item .r-cost{font-size:14px;font-weight:700;color:#b06a2e;}
+.reward-item .r-cost{font-size:14px;font-weight:700;color:var(--warn-deep);}
 .badge-row{display:flex;gap:12px;flex-wrap:wrap;}
-.badge{flex:1 1 110px;min-width:100px;text-align:center;padding:14px 8px;border-radius:14px;background:#f7f6f2;border:1px solid var(--line);}
-.badge .b-ic{font-size:28px;}
-.badge.lit{background:linear-gradient(135deg,#fdf3e0,#fbe3c0);border-color:#f0cf9a;}
-.badge .b-t{font-size:13px;font-weight:600;margin-top:4px;}
+.badge{flex:1 1 110px;min-width:100px;text-align:center;padding:16px 8px;border-radius:16px;background:#F7F8FA;border:1px solid var(--line);}
+.badge .b-ic{font-size:30px;}
+.badge.lit{background:linear-gradient(135deg,#FEF3E0,#FCE4C2);border-color:#F3CF96;}
+.badge .b-t{font-size:13px;font-weight:600;margin-top:5px;}
 
-/* ===== 提示 ===== */
-.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:rgba(26,27,28,.9);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;max-width:80%;text-align:center;}
-.toast.show{opacity:1;}
+/* ===== toast ===== */
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(10px);background:rgba(24,30,44,.92);color:#fff;padding:11px 22px;border-radius:24px;font-size:13px;z-index:200;opacity:0;transition:all .3s;pointer-events:none;max-width:82%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* ===== 手机端 ===== */
 .tabbar{display:none;}
 .mobile-head{display:none;}
 @media (max-width:768px){
   .sidebar{display:none;}
-  .main{padding:14px 14px 84px;max-width:none;}
-  .mobile-head{display:flex;align-items:center;gap:10px;padding:14px 16px 6px;position:sticky;top:0;background:var(--bg);z-index:50;}
-  .mobile-head .logo-ic{width:32px;height:32px;font-size:17px;}
+  .main{padding:0 14px 92px;}
+  .mobile-head{display:flex;align-items:center;gap:10px;padding:16px 16px 12px;position:sticky;top:0;background:rgba(244,245,247,.88);backdrop-filter:blur(12px);z-index:50;}
+  .mobile-head .logo-ic{width:34px;height:34px;font-size:18px;}
   .mobile-head .t{font-size:17px;font-weight:700;}
-  .tabbar{
-    display:flex;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
-    z-index:90;padding:6px 4px calc(6px + env(safe-area-inset-bottom));
-  }
-  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#8a8d92;padding:4px 2px;border-radius:10px;}
-  .tab .ic{font-size:19px;}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:90;padding:8px 10px calc(8px + env(safe-area-inset-bottom));}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:#8A8F9A;padding:5px 2px;border-radius:12px;transition:all .15s;}
+  .tab .ic{font-size:20px;}
   .tab.on{color:var(--primary-deep);font-weight:600;background:var(--primary-bg);}
   .grid > .card{flex:1 1 100%;}
-  .page-title{font-size:19px;}
-  .gold-main .g-p{font-size:32px;}
-  .kpi .k-v{font-size:20px;}
+  .home-grid .home-col{flex:1 1 100%;}
+  .page-title{font-size:20px;}
+  .kpi-row{gap:10px;}
+  .kpi{flex:1 1 44%;min-width:0;padding:13px 14px;}
+  .kpi .k-v{font-size:19px;}
+  .gold-main .g-p{font-size:36px;}
+  .toast{bottom:84px;}
 }
 </style>
 </head>
@@ -247,11 +280,32 @@ var NODE_TYPES=['考试','比赛','作业','活动','其他'];
 var PRIOS=['高','中','低'];
 var WEEK_CN=['一','二','三','四','五','六','日'];
 var LESSON_GROUPS=[[1,2],[3,4],[5,6],[7,8],[9,10]];
+var LESSON_TIMES={1:'08:30-10:10',3:'10:30-12:10',5:'14:30-16:10',7:'16:30-18:10',9:'19:30-21:10'};
 
 function defDB(){
   return {
-    ver:1, nickname:'', currentWeek:1,
-    tasks:[], nodes:[], courses:[],
+    ver:2, nickname:'', currentWeek:1,
+    tasks:[], nodes:[], courses:[
+    {id:'c01',name:'中学数学课程资源开发',day:1,start:1,end:2,loc:'东校区云海楼215',weeks:'10-17',teacher:'唐祥德'},
+    {id:'c02',name:'实变函数',day:1,start:3,end:4,loc:'东校区云海楼211',weeks:'2-13',teacher:'刘宗盛'},
+    {id:'c03',name:'中学数学教学技能',day:1,start:5,end:6,loc:'东校区九章楼505',weeks:'2-9',teacher:'吴雄韬'},
+    {id:'c04',name:'CAI课件设计（含几何画板）',day:2,start:1,end:2,loc:'东校区九章楼303',weeks:'3-6',teacher:'宫兆刚'},
+    {id:'c05',name:'现代教育技术应用',day:2,start:3,end:4,loc:'东校区九章楼303',weeks:'3-10',teacher:'宫兆刚'},
+    {id:'c06',name:'数理统计',day:2,start:7,end:8,loc:'东校区九章楼420',weeks:'2-13',teacher:'吴雄韬'},
+    {id:'c07',name:'CAI课件设计（含几何画板）',day:3,start:1,end:2,loc:'东校区云海楼215',weeks:'2-5',teacher:'宫兆刚'},
+    {id:'c08',name:'中学数学教学设计与指导（含微格教学）',day:3,start:1,end:2,loc:'东校区云海楼215',weeks:'10-17',teacher:'吴嘉琳'},
+    {id:'c09',name:'数值分析',day:3,start:3,end:4,loc:'东校区九章楼408',weeks:'2-13',teacher:'彭洁'},
+    {id:'c10',name:'中学数学教学设计与指导（含微格教学）',day:3,start:9,end:10,loc:'东校区云海楼215',weeks:'2-17',teacher:'吴嘉琳'},
+    {id:'c11',name:'实变函数',day:4,start:1,end:2,loc:'东校区九章楼505',weeks:'2-13',teacher:'刘宗盛'},
+    {id:'c12',name:'现代教育技术应用',day:4,start:3,end:4,loc:'东校区九章楼505',weeks:'2-9',teacher:'宫兆刚'},
+    {id:'c13',name:'教师职业道德和专业发展',day:4,start:3,end:4,loc:'东校区云海楼211',weeks:'10-17',teacher:'王妍力'},
+    {id:'c14',name:'数理统计',day:4,start:5,end:6,loc:'东校区九章楼420',weeks:'2-13',teacher:'吴雄韬'},
+    {id:'c15',name:'初等数学研究',day:4,start:7,end:8,loc:'东校区云海楼215',weeks:'2-17',teacher:'唐祥德'},
+    {id:'c16',name:'德育与班级管理',day:5,start:1,end:2,loc:'东校区云海楼215',weeks:'10-17',teacher:'赵新云'},
+    {id:'c17',name:'教育科学研究方法',day:5,start:1,end:2,loc:'东校区云海楼215',weeks:'2-9',teacher:'王祖霖'},
+    {id:'c18',name:'大学生就业指导',day:5,start:3,end:4,loc:'东校区九章楼303',weeks:'7-8,10',teacher:'颜绘锦'},
+    {id:'c19',name:'数值分析',day:6,start:1,end:2,loc:'东校区九章楼408',weeks:'2-13',teacher:'彭洁'}
+  ],
     resCats:['专业课','教资','竞赛','教案','学生会','其他'], resItems:[],
     kanban:[],
     habits:[
@@ -276,8 +330,18 @@ function defDB(){
 }
 
 var DB;
-try{ DB=JSON.parse(localStorage.getItem(KEY)) || defDB(); }catch(e){ DB=defDB(); }
-if(!DB.ver || DB.ver!==1){ DB=defDB(); }
+var _raw=null;
+try{ _raw=JSON.parse(localStorage.getItem(KEY)); }catch(e){ _raw=null; }
+if(_raw && _raw.ver===1){
+  /* v1 -> v2 迁移：保留用户已有自定义数据，课表替换为预置的本学期课表 */
+  DB=Object.assign({}, defDB(), _raw);
+  DB.courses=defDB().courses;
+  DB.ver=2;
+}else if(_raw && _raw.ver===2){
+  DB=Object.assign({}, defDB(), _raw);
+}else{
+  DB=defDB();
+}
 if(!DB.resCats) DB.resCats=['专业课','教资','竞赛','教案','学生会','其他'];
 if(!DB.rewards) DB.rewards=defDB().rewards;
 if(!DB.habits) DB.habits=defDB().habits;
@@ -399,6 +463,7 @@ var NAV=[
   {k:'set', t:'设置', ic:'⚙️'}
 ];
 var PAGE='home';
+(function(){ try{ var pm=location.search.match(/[?&]p=([a-z]+)/i); if(pm && ['home','course','task','node','res','board','habit','gold','app','reward','set'].indexOf(pm[1])>=0){ PAGE=pm[1]; } var wm=location.search.match(/[?&]week=(\d+)/); if(wm){ DB.currentWeek=Math.min(Math.max(parseInt(wm[1],10),1),20); } }catch(e){} })();
 var TITLES={home:'首页',course:'课表',task:'任务清单',node:'日历·倒计时',res:'资料库',board:'项目看板',habit:'习惯打卡',gold:'黄金价格',app:'应用管理',reward:'奖励中心',set:'设置'};
 
 function go(p){
@@ -412,7 +477,7 @@ function renderNav(){
   var html='';
   NAV.forEach(function(n){
     var extra='';
-    if(n.k==='task'){ var c=DB.tasks.filter(function(t){return !t.done;}).length; if(c>0) extra='<span class="pt">'+c+'</span>'; }
+    if(n.k==='task'){ var c=DB.tasks.filter(function(t){return !t.done;}).length; if(c>0) extra='<span class="nav-badge">'+c+'</span>'; }
     html+='<div class="nav-item'+(PAGE===n.k?' on':'')+'" data-nav="'+n.k+'"><span class="ic">'+n.ic+'</span><span class="grow">'+n.t+'</span>'+extra+'</div>';
   });
   $('nav').innerHTML=html;
@@ -433,77 +498,75 @@ function renderHome(){
   var greet=hourGreet()+'，'+(DB.nickname||'同学');
   var wd='周'+WEEK_CN[(t.getDay()+6)%7];
   var today=todayStr();
-
   var undone=DB.tasks.filter(function(x){return !x.done;});
   var todayTasks=undone.filter(function(x){ return !x.due || x.due<=today; }).slice(0,5);
   var todayCount=todayTasks.length;
-
-  var nodes=DB.nodes.slice().sort(function(a,b){return a.date<b.date?-1:1;})
-    .filter(function(n){return daysUntil(n.date)>=0;}).slice(0,3);
-
+  var nodes=DB.nodes.slice().sort(function(a,b){return a.date<b.date?-1:1;}).filter(function(n){return daysUntil(n.date)>=0;}).slice(0,3);
   var coursesToday=DB.courses.filter(function(c){ return c.day===((t.getDay()+6)%7+1) && weekMatch(c.weeks,DB.currentWeek); });
-
   var streak=streakCalc();
   var doneToday=habitOn(today);
   var weekTasks=DB.tasks.filter(function(x){return x.done;}).length;
 
-  var html='<div class="page-title">'+greet+'</div><div class="page-sub">'+t.getFullYear()+'年'+(t.getMonth()+1)+'月'+t.getDate()+'日 · '+wd+' · 第'+DB.currentWeek+'周</div>';
+  var html='<div class="page-title">'+greet+'</div>';
+  html+='<div class="page-sub">'+t.getFullYear()+'年'+(t.getMonth()+1)+'月'+t.getDate()+'日 · '+wd+' · 第'+DB.currentWeek+'周</div>';
 
   html+='<div class="kpi-row">';
-  html+='<div class="kpi"><div class="k-l">今日待办</div><div class="k-v">'+todayCount+'<small> 项</small></div></div>';
-  html+='<div class="kpi"><div class="k-l">积分余额</div><div class="k-v" style="color:#b06a2e;">'+DB.points+'<small> 分</small></div></div>';
-  html+='<div class="kpi"><div class="k-l">连续打卡</div><div class="k-v" style="color:#d9872f;">'+streak+'<small> 天</small></div></div>';
-  html+='<div class="kpi"><div class="k-l">已完成任务</div><div class="k-v">'+weekTasks+'<small> 项</small></div></div>';
+  html+='<div class="kpi" style="flex-direction:row;align-items:center;"><div class="k-ic" style="background:var(--primary-bg);">📋</div><div class="k-body"><div class="k-l">今日待办</div><div class="k-v">'+todayCount+'<small> 项</small></div></div></div>';
+  html+='<div class="kpi" style="flex-direction:row;align-items:center;"><div class="k-ic" style="background:var(--warn-bg);">🎁</div><div class="k-body"><div class="k-l">积分余额</div><div class="k-v" style="color:var(--warn-deep);">'+DB.points+'<small> 分</small></div></div></div>';
+  html+='<div class="kpi" style="flex-direction:row;align-items:center;"><div class="k-ic" style="background:var(--accent-bg);">🔥</div><div class="k-body"><div class="k-l">连续打卡</div><div class="k-v" style="color:var(--accent);">'+streak+'<small> 天</small></div></div></div>';
+  html+='<div class="kpi" style="flex-direction:row;align-items:center;"><div class="k-ic" style="background:var(--green-bg);">✅</div><div class="k-body"><div class="k-l">已完成任务</div><div class="k-v" style="color:var(--green);">'+weekTasks+'<small> 项</small></div></div></div>';
   html+='</div>';
 
-  /* 今日课程 */
-  html+='<div class="card"><div class="card-h"><span class="t">📗 今日课程（'+wd+'）</span><span class="more" data-nav="course">进入课表 ›</span></div>';
-  if(coursesToday.length===0){ html+='<div class="empty"><div class="e-ic">🛋</div>今天没有课，好好安排自己的时间吧</div>'; }
-  else{
-    coursesToday.sort(function(a,b){return a.start-b.start;});
-    coursesToday.forEach(function(c){
-      html+='<div class="list-item"><span class="badge-dot" style="background:'+courseColor(c)+';"></span><div class="grow"><div class="tt">'+esc(c.name)+'</div><div class="ds">第'+c.start+'-'+c.end+'节'+(c.loc?' · '+esc(c.loc):'')+(c.weeks?' · '+esc(c.weeks)+'周':'')+'</div></div></div>';
-    });
-  }
-  html+='</div>';
+  html+='<div class="home-grid"><div class="home-col">';
 
-  /* 今日待办 */
-  html+='<div class="card"><div class="card-h"><span class="t">✅ 今日待办</span><span class="more" data-nav="task">全部任务 ›</span></div>';
+  html+='<div class="card"><div class="card-h"><span class="t">📌 今日待办</span><span class="more" data-nav="task">全部任务 ›</span></div>';
   if(undone.length===0){ html+='<div class="empty"><div class="e-ic">🎉</div>太棒了，当前没有未完成任务</div>'; }
   else{
     todayTasks.forEach(function(x){
       html+='<div class="list-item"><div class="check" data-act="done" data-id="'+x.id+'">✓</div><div class="grow"><div class="tt">'+esc(x.title)+'</div><div class="ds"><span class="chip blue">'+esc(x.scene)+'</span> <span class="chip orange">'+x.prio+'优先级</span></div></div></div>';
     });
-    if(undone.length>todayTasks.length){ html+='<div class="ds" style="padding:8px 4px 0;">还有 '+(undone.length-todayTasks.length)+' 项非今日任务未完成，<span style="color:var(--primary-deep);cursor:pointer;" data-nav="task">去看看 ›</span></div>'; }
+    if(undone.length>todayTasks.length){ html+='<div class="ds" style="padding:8px 4px 0;">还有 '+(undone.length-todayTasks.length)+' 项非今日任务，<span style="color:var(--primary-deep);cursor:pointer;" data-nav="task">去看看 ›</span></div>'; }
   }
   html+='</div>';
 
-  /* 倒计时 */
   html+='<div class="card"><div class="card-h"><span class="t">⏳ 最近节点</span><span class="more" data-nav="node">日历 ›</span></div>';
   if(nodes.length===0){ html+='<div class="empty"><div class="e-ic">🗓</div>还没有安排节点，去日历里添加吧</div>'; }
   else{
     nodes.forEach(function(n){
       var d=daysUntil(n.date); var urgent=d<=7;
       var cls=urgent?'red':'blue';
-      html+='<div class="list-item"><div class="grow"><div class="tt">'+esc(n.title)+' <span class="chip '+cls+'">'+esc(n.type)+'</span></div><div class="ds">'+fmtDate(n.date)+'</div></div><div style="font-size:15px;font-weight:700;color:'+(urgent?'var(--red)':'var(--primary-deep)')+';">'+(d===0?'就是今天':d+'天后')+'</div></div>';
+      html+='<div class="list-item"><div class="grow"><div class="tt">'+esc(n.title)+' <span class="chip '+cls+'">'+esc(n.type)+'</span></div><div class="ds">'+fmtDate(n.date)+'</div></div><div style="font-size:16px;font-weight:700;color:'+(urgent?'var(--red)':'var(--primary-deep)')+';">'+(d===0?'就是今天':d+'天后')+'</div></div>';
+    });
+  }
+  html+='</div>';
+  html+='</div>';
+
+  html+='<div class="home-col">';
+
+  html+='<div class="card"><div class="card-h"><span class="t">📗 今日课程（'+wd+'）</span><span class="more" data-nav="course">进入课表 ›</span></div>';
+  if(coursesToday.length===0){
+    html+='<div class="empty"><div class="e-ic">🛋</div>今天没有课'+(DB.currentWeek<=1?'<br><span style="font-size:12px;">本学期课程大多自第 2 周起开始</span>':'')+'</div>';
+  }else{
+    coursesToday.sort(function(a,b){return a.start-b.start;});
+    coursesToday.forEach(function(c){
+      html+='<div class="list-item"><span class="badge-dot" style="background:'+courseColor(c)+';"></span><div class="grow"><div class="tt">'+esc(c.name)+'</div><div class="ds">第'+c.start+'-'+c.end+'节'+(c.loc?' · '+esc(c.loc):'')+(c.teacher?' · '+esc(c.teacher):'')+(c.weeks?' · '+esc(c.weeks)+'周':'')+'</div></div></div>';
     });
   }
   html+='</div>';
 
-  /* 打卡 */
   html+='<div class="card"><div class="card-h"><span class="t">🔥 今日打卡</span><span class="more" data-nav="habit">全部习惯 ›</span></div>';
-  html+='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">';
+  html+='<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">';
   if(doneToday){ html+='<span class="chip green">今日已打卡 ✓</span>'; }
   else{ html+='<button class="btn primary sm" data-act="checkToday">完成今日打卡</button>'; }
   html+='<span class="chip orange">连击 '+streak+' 天</span>';
-  html+='<span class="ds">（打卡 +2 分，连击第3天起每日额外加分，封顶+5）</span>';
+  html+='</div>';
+  html+='<div class="ds" style="margin-top:10px;">打卡 +'+P_HABIT+' 分 · 连击第'+STREAK_START+'天起每日额外加分（封顶 +'+STREAK_CAP+'）</div>';
+  html+='</div>';
   html+='</div></div>';
 
   $('main').innerHTML=html;
-}
-
-/* ---------- 课表 ---------- */
-function courseColor(c){ var colors=['#9BBBF4','#C9A7E8','#94D4D0','#F4B393','#A2DDAA','#E4D48F','#EAA7B2','#8BC8EA']; return colors[(c.id||'').length%colors.length]||colors[0]; }
+}/* ---------- 课表 ---------- */
+function courseColor(c){ var colors=['#4C7DF0','#8B7CF6','#2FB5A3','#F5A85B','#2FBF71','#E4B44C','#E87FA0','#5B8DEF']; var s=c.name||''; var h=0; for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))%997; } return colors[h%colors.length]; }
 
 function weekMatch(weeks, cur){
   if(!weeks) return true;
@@ -524,15 +587,15 @@ function weekMatch(weeks, cur){
 
 function renderCourse(){
   var t=new Date();
-  var todayDow=(t.getDay()+6)%7+1; /* 周一=1 */
-  var html='<div class="page-title">课表</div><div class="page-sub">大三课程安排 · 点击格子添加课程，点击已有课程可编辑</div>';
-  html+='<div class="week-bar"><button class="btn sm" data-act="weekPrev">◀</button><span class="wk">第 '+DB.currentWeek+' 周</span><button class="btn sm" data-act="weekNext">▶</button><span class="ds" style="margin-left:8px;">单/双周与周数范围在编辑课程时设置</span></div>';
+  var todayDow=(t.getDay()+6)%7+1;
+  var html='<div class="page-title">课表</div><div class="page-sub">2026-2027-1 学期 · 点击格子添加课程，点击已有课程可编辑</div>';
+  html+='<div class="week-bar"><button class="btn sm" data-act="weekPrev">◀</button><span class="wk">第 '+DB.currentWeek+' 周</span><button class="btn sm" data-act="weekNext">▶</button><span class="ds" style="margin-left:10px;">单/双周与周数范围在编辑课程时设置</span></div>';
 
-  html+='<div class="card" style="padding:12px;"><div class="tb-wrap"><table class="cal"><tr><th style="width:56px;">节次</th>';
+  html+='<div class="card" style="padding:14px;"><div class="tb-wrap"><table class="cal"><tr><th style="width:64px;">节次</th>';
   for(var d=1;d<=7;d++){ html+='<th class="'+(d===todayDow?'today':'')+'">周'+WEEK_CN[d-1]+'</th>'; }
   html+='</tr>';
   LESSON_GROUPS.forEach(function(g){
-    html+='<tr><th style="font-size:11px;">'+g[0]+'-'+g[1]+'节</th>';
+    html+='<tr><th style="font-size:11px;line-height:1.5;">'+g[0]+'-'+g[1]+'节<br><span style="font-weight:400;color:var(--sub2);font-size:10px;">'+(LESSON_TIMES[g[0]]||'')+'</span></th>';
     for(var d2=1;d2<=7;d2++){
       var cs=DB.courses.filter(function(c){ return c.day===d2 && c.start<=g[1] && c.end>=g[0] && weekMatch(c.weeks,DB.currentWeek); });
       html+='<td class="'+(d2===todayDow?'today':'')+'" data-act="cellAdd" data-day="'+d2+'" data-slot="'+g[0]+'">';
@@ -540,27 +603,33 @@ function renderCourse(){
       else{
         cs.sort(function(a,b){return a.start-b.start;});
         cs.forEach(function(c){
-          html+='<div data-act="cellEdit" data-id="'+c.id+'" style="background:'+courseColor(c)+'33;border-radius:8px;padding:4px 6px;margin-bottom:3px;cursor:pointer;"><div class="c-name">'+esc(c.name)+'</div><div class="c-loc">'+(c.loc?esc(c.loc):'')+'</div>'+(c.weeks?'<div class="c-weeks">'+esc(c.weeks)+'周</div>':'')+'</div>';
+          var col=courseColor(c);
+          html+='<div class="course-block" data-act="cellEdit" data-id="'+c.id+'" style="background:'+col+'1F;border-left-color:'+col+';"><div class="c-name">'+esc(c.name)+'</div><div class="c-loc">'+(c.loc?esc(c.loc):'')+'</div>'+(c.weeks?'<div class="c-weeks">'+esc(c.weeks)+'周</div>':'')+'</div>';
         });
       }
       html+='</td>';
     }
     html+='</tr>';
   });
-  html+='</table></div></div>';
+  html+='</table></div>';
+  if(DB.currentWeek<=1 && DB.courses.length>0){
+    html+='<div class="week-hint ds">💡 当前第 1 周，本学期课程大多自第 2 周起开始；可用上方 ◀ ▶ 切换周次预览。</div>';
+  }
+  html+='</div>';
 
-  html+='<div class="card"><div class="card-h"><span class="t">管理课程</span><button class="btn primary sm" data-act="courseAdd">＋ 添加课程</button></div>';
+  html+='<div class="card"><div class="card-h"><span class="t">📚 管理课程 <span class="ds" style="font-weight:400;">（'+DB.courses.length+' 条安排）</span></span><button class="btn primary sm" data-act="courseAdd">＋ 添加课程</button></div>';
   if(DB.courses.length===0){ html+='<div class="empty"><div class="e-ic">🗓</div>还没有课程，点击「添加课程」录入你的大三课表</div>'; }
   else{
+    var seen={};
     DB.courses.slice().sort(function(a,b){return (a.day*100+a.start)-(b.day*100+b.start);}).forEach(function(c){
-      html+='<div class="list-item"><span class="badge-dot" style="background:'+courseColor(c)+';"></span><div class="grow"><div class="tt">'+esc(c.name)+'</div><div class="ds">周'+WEEK_CN[c.day-1]+' 第'+c.start+'-'+c.end+'节'+(c.loc?' · '+esc(c.loc):'')+(c.weeks?' · '+esc(c.weeks)+'周':'')+'</div></div><button class="btn sm" data-act="courseEdit" data-id="'+c.id+'">编辑</button><button class="btn sm danger" data-act="courseDel" data-id="'+c.id+'">删除</button></div>';
+      var key=c.name+'|'+c.day+'|'+c.start;
+      if(seen[key]) return; seen[key]=true;
+      html+='<div class="list-item"><span class="badge-dot" style="background:'+courseColor(c)+';"></span><div class="grow"><div class="tt">'+esc(c.name)+'</div><div class="ds">周'+WEEK_CN[c.day-1]+' 第'+c.start+'-'+c.end+'节'+(c.loc?' · '+esc(c.loc):'')+(c.teacher?' · '+esc(c.teacher):'')+(c.weeks?' · '+esc(c.weeks)+'周':'')+'</div></div><button class="btn sm" data-act="courseEdit" data-id="'+c.id+'">编辑</button><button class="btn sm danger" data-act="courseDel" data-id="'+c.id+'">删除</button></div>';
     });
   }
   html+='</div>';
   $('main').innerHTML=html;
-}
-
-/* ---------- 任务清单 ---------- */
+}/* ---------- 任务清单 ---------- */
 function prioRank(p){ return p==='高'?0:(p==='中'?1:2); }
 function taskSort(a,b){ return prioRank(a.prio)-prioRank(b.prio) || (a.due||'9999').localeCompare(b.due||'9999'); }
 
@@ -1163,6 +1232,7 @@ function courseForm(c, day, slot){
     {key:'start',label:'开始节次',type:'options',opts:[1,2,3,4,5,6,7,8,9,10],value:c?c.start:(slot||1)},
     {key:'end',label:'结束节次',type:'options',opts:[1,2,3,4,5,6,7,8,9,10],value:c?c.end:((slot||1)+1)},
     {key:'loc',label:'地点（可选）',type:'text',value:c?c.loc:''},
+    {key:'teacher',label:'任课教师（可选）',type:'text',value:c?c.teacher:''},
     {key:'weeks',label:'周数（留空=每周都上；可填 1-16、单、双、1-8,10-16）',type:'text',value:c?c.weeks:''}
   ];
   openForm(c?'编辑课程':'添加课程',fields,function(v){
@@ -1170,9 +1240,9 @@ function courseForm(c, day, slot){
     var start=Math.max(1,Math.min(10,parseInt(v.start,10)));
     var end=Math.max(start,Math.min(10,parseInt(v.end,10)));
     if(c){
-      c.name=v.name; c.day=dayNum; c.start=start; c.end=end; c.loc=v.loc; c.weeks=v.weeks;
+      c.name=v.name; c.day=dayNum; c.start=start; c.end=end; c.loc=v.loc; c.teacher=v.teacher; c.weeks=v.weeks;
     }else{
-      DB.courses.push({id:uid(),name:v.name,day:dayNum,start:start,end:end,loc:v.loc,weeks:v.weeks});
+      DB.courses.push({id:uid(),name:v.name,day:dayNum,start:start,end:end,loc:v.loc,teacher:v.teacher,weeks:v.weeks});
     }
     save(); render(); toast('课程已保存');
   });
